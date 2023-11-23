@@ -657,4 +657,8 @@ let currentStep = 1;
     currentQuestion = 0;
     document.getElementById('start-container').style.display = 'block';
     document.getElementById('quiz-container').style.display = 'none';
+<<<<<<< HEAD
   }
+=======
+  }
+>>>>>>> ec203dfaed42bf7033afda0c80667be090a87e3d
