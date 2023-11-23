@@ -553,3 +553,108 @@ let currentStep = 1;
   window.onload = function() {
     showWelcomeModal();
   }
+
+  // quiz
+  
+  const questions = [
+    {
+      question: "What is the main purpose of a cleanser?",
+      options: ["Moisturize the skin", "Exfoliate the skin", "Cleanse the skin", "Treat acne"],
+      correctAnswer: "Cleanse the skin"
+    },
+    {
+      question: "Which vitamin is essential for collagen production?",
+      options: ["Vitamin A", "Vitamin C", "Vitamin E", "Vitamin K"],
+      correctAnswer: "Vitamin C"
+    },
+    {
+      question: "What is the key ingredient in a moisturizer?",
+      options: ["Hyaluronic Acid", "Salicylic Acid", "Retinol", "Aloe Vera"],
+      correctAnswer: "Hyaluronic Acid"
+    },
+    {
+      question: "Which skincare product helps to remove dead skin cells?",
+      options: ["Toner", "Serum", "Exfoliator", "Sunscreen"],
+      correctAnswer: "Exfoliator"
+    },
+    {
+      question: "What does SPF stand for in sunscreen?",
+      options: ["Sun Protection Factor", "Skin Pore Formula", "Sunshine Prevention Factor", "Skin Perfect Finish"],
+      correctAnswer: "Sun Protection Factor"
+    },
+    {
+      question: "Which ingredient is known for its anti-aging properties?",
+      options: ["Tea Tree Oil", "Collagen", "Jojoba Oil", "Retinol"],
+      correctAnswer: "Retinol"
+    },
+    {
+      question: "What is the recommended order of applying skincare products?",
+      options: ["Moisturizer, Toner, Serum", "Cleanser, Toner, Moisturizer", "Serum, Moisturizer, Sunscreen", "Cleanser, Serum, Sunscreen"],
+      correctAnswer: "Cleanser, Toner, Moisturizer"
+    },
+    {
+      question: "What does BB cream stand for?",
+      options: ["Beauty Balm", "Blemish Balm", "Brightening Balm", "Base Balm"],
+      correctAnswer: "Beauty Balm"
+    },
+    {
+      question: "Which skincare product is used to remove eye makeup?",
+      options: ["Cleanser", "Micellar Water", "Sunscreen", "Toner"],
+      correctAnswer: "Micellar Water"
+    },
+    {
+      question: "What is the function of a toner in a skincare routine?",
+      options: ["Remove Makeup", "Provide Hydration", "Exfoliate the Skin", "Reduce Dark Circles"],
+      correctAnswer: "Provide Hydration"
+    }
+    
+  ];
+
+  let currentQuestion = 0;
+
+  function startQuiz() {
+    document.getElementById('start-container').style.display = 'none';
+    document.getElementById('quiz-container').style.display = 'block';
+    loadQuestion();
+  }
+
+  function loadQuestion() {
+    if (currentQuestion < questions.length) {
+      const quizContainer = document.getElementById('quiz-container');
+      const questionDiv = document.createElement('div');
+      questionDiv.className = 'question';
+      questionDiv.innerHTML = `
+        <h2>Question ${currentQuestion + 1}</h2>
+        <p>${questions[currentQuestion].question}</p>
+        <div class="options">
+          ${questions[currentQuestion].options.map(option => `<button class="option" onclick="checkAnswer('${option}')">${option}</button>`).join('')}
+        </div>
+      `;
+      quizContainer.innerHTML = '';
+      quizContainer.appendChild(questionDiv);
+    } else {
+      showResult();
+    }
+  }
+
+  function checkAnswer(selectedAnswer) {
+    const correctAnswer = questions[currentQuestion].correctAnswer;
+    if (selectedAnswer === correctAnswer) {
+      alert('Correct!');
+    } else {
+      alert(`Incorrect! The correct answer is: ${correctAnswer}`);
+    }
+    currentQuestion++;
+    loadQuestion();
+  }
+
+  function showResult() {
+    alert('Quiz completed! You can show the user\'s score or other information here.');
+    resetQuiz();
+  }
+
+  function resetQuiz() {
+    currentQuestion = 0;
+    document.getElementById('start-container').style.display = 'block';
+    document.getElementById('quiz-container').style.display = 'none';
+  }
